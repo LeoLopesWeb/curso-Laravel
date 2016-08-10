@@ -11,3 +11,5 @@ Route::get('/sobre', function () {
 Route::get('/contato', function () {
     return "Página de contato do site";
 });
+
+Route::get('/produtos', 'ProdutoController@lista');
