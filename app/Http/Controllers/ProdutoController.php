@@ -9,17 +9,12 @@ class ProdutoController extends Controller
 
     public function lista()
     {
-        $html = "<h1>Listagem de Produtos</h1>";
-        $html .= "<ul>";
         $produtos = DB::select('select * from produtos');
-        
-        foreach ($produtos as $p) {
-            $html .= "<li>Nome: ".$p->nome.", Descrição: ".$p->descricao."</li>";
+
+        //return view('listagem')->with('produtos', $produtos);
+        if (view()->exists('listagem')) {
+            return view('listagem', ['produtos' => $produtos]);
         }
-
-        $html .= "</ul>";
-
-        return $html;
     }
 
 }
