@@ -13,8 +13,8 @@ class ProdutoController extends Controller
         $produtos = DB::select('select * from produtos');
 
         //return view('listagem')->with('produtos', $produtos);
-        if (view()->exists('listagem')) {
-            return view('listagem', ['produtos' => $produtos]);
+        if (view()->exists('produto.listagem')) {
+            return view('produto.listagem', ['produtos' => $produtos]);
         }
     }
 
@@ -32,7 +32,7 @@ class ProdutoController extends Controller
             return "Esse produto não existe";
         }
 
-        return view('detalhes', ['p' => $resposta[0]]);
+        return view('produto.detalhes', ['p' => $resposta[0]]);
     }
 
 }
