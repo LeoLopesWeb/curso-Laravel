@@ -13,6 +13,8 @@ class ProdutoController extends Controller
         $produtos = DB::select('select * from produtos');
 
         //return view('listagem')->with('produtos', $produtos);
+
+        // Verifica se existe uma view
         if (view()->exists('produto.listagem')) {
             return view('produto.listagem', ['produtos' => $produtos]);
         }
@@ -32,6 +34,7 @@ class ProdutoController extends Controller
             return "Esse produto não existe";
         }
 
+        // Retorna para uma view
         return view('produto.detalhes', ['p' => $resposta[0]]);
     }
 
@@ -42,6 +45,7 @@ class ProdutoController extends Controller
 
     public function adiciona()
     {
+        // Atribui um atributo a determinada variavel
         $nome = Request::input('nome');
         $descricao = Request::input('descricao');
         $valor = Request::input('valor');
@@ -49,7 +53,14 @@ class ProdutoController extends Controller
 
         DB::insert('insert into produtos (nome, descricao, valor, quantidade) values (?, ?, ?, ?)', array($nome, $descricao, $valor, $quantidade));
 
-        return view('produto.adicionado')->with('nome', $nome);
+        // Redireciona para o método lista. // Passa os parametros do formulário. // Especifica quais parâmetros serão enviados
+        return redirect()->action('ProdutoController@lista')->withInput(Request::only('nome'));
+    }
+
+    public function listaJson()
+    {
+        $produtos = DB::select('select * from produtos');
+        return response()->json($produtos);
     }
 
 }
