@@ -4,7 +4,7 @@
 
 <h1>Novo produto</h1>
 
-<form action="/produtos/adiciona" method="post">
+<form action="{{ action('ProdutoController@adiciona') }}" method="post">
     
     <input type="hidden" name="_token" value="{{{ csrf_token() }}}">
 
@@ -28,7 +28,7 @@
         <input type="number" class="form-control" name="quantidade">
     </div>
 
-    <button type="submit" class="btn btn-primary btn-block">Submit</button>
+    <button type="submit" class="btn btn-primary btn-block">Cadastrar</button>
 </form>
 
 @stop

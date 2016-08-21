@@ -7,12 +7,14 @@
     <h1>Listagem de Produtos</h1>
     <table class="table table-striped">
         @foreach ($produtos as $p)
-        <tr class="{{$p->quantidade <= 1 ? 'danger' : ''}}">
-            <td>{{$p->nome}}</td>
-            <td>{{$p->valor}}</td>
-            <td>{{$p->descricao}}</td>
-            <td>{{$p->quantidade}}</td>
-            <td><a href="/produtos/mostra/{{$p->id}}"><span class="glyphicon glyphicon-search"></span></a></td>
+        <tr class="{{ $p->quantidade <= 1 ? 'danger' : '' }}">
+            <td>{{ $p->nome }}</td>
+            <td>{{ $p->valor }}</td>
+            <td>{{ $p->descricao }}</td>
+            <td>{{ $p->quantidade }}</td>
+            <td><a href="{{ action('ProdutoController@mostra', $p->id) }}"><span class="glyphicon glyphicon-search"></span></a></td>
+            <td><a href="{{ action('ProdutoController@remove', $p->id) }}" class="glyphicon glyphicon-trash"></a></td>
+            <td><a href="{{ action('ProdutoController@alterar', $p->id) }}" class="glyphicon glyphicon-wrench"></a></td>
         </tr>
         @endforeach
     </table>

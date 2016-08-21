@@ -20,4 +20,10 @@ Route::get('/produtos/novo', 'ProdutoController@novo');
 
 Route::post('produtos/adiciona', 'ProdutoController@adiciona');
 
+Route::get('/produtos/remove/{id}', 'ProdutoController@remove');
+
+Route::get('/produto/alterar/{id}', 'ProdutoController@alterar');
+
+Route::put('/produtos/atualizar/{id}', 'ProdutoController@atualizar');
+
 Route::get('/teste', 'ProdutoController@listaJson');
