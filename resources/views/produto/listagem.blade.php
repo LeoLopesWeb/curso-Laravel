@@ -12,7 +12,7 @@
             <td>{{ $p->valor }}</td>
             <td>{{ $p->descricao }}</td>
             <td>{{ $p->quantidade }}</td>
-            <td><a href="{{ action('ProdutoController@mostra', $p->id) }}"><span class="glyphicon glyphicon-search"></span></a></td>
+            <td><a href="{{ action('ProdutoController@mostra', $p->id) }}"><span class="glyphicon glyphicon-eye-open"></span></a></td>
             <td><a href="{{ action('ProdutoController@remove', $p->id) }}" class="glyphicon glyphicon-trash"></a></td>
             <td><a href="{{ action('ProdutoController@alterar', $p->id) }}" class="glyphicon glyphicon-wrench"></a></td>
         </tr>

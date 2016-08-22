@@ -2,9 +2,11 @@
 
 namespace estoque\Http\Controllers;
 
+use Validator;
 use DB;
 use Request;
 use estoque\Produto;
+use estoque\Http\Requests\ProdutoRequest;
 
 class ProdutoController extends Controller
 {
@@ -53,7 +55,7 @@ class ProdutoController extends Controller
       return view('produto.formulario');
     }
 
-    public function adiciona()
+    public function adiciona(ProdutoRequest $request)
     {
         /*Usando instruções sql
         // Atribui um atributo a determinada variavel
@@ -66,8 +68,20 @@ class ProdutoController extends Controller
         //DB::insert('insert into produtos (nome, descricao, valor, quantidade) values (?, ?, ?, ?)', array($nome, $descricao, $valor, $quantidade));
         */
 
+        // Usar quando for fazer validações pequenas, quando grades utilizar o form request
+        //$validator = Validator::make(['nome' => Request::input('nome')], ['nome' => 'required|min:5']);
+
+        // Retorna um array com os erros
+        //$messages = $validator->messages();
+
+        // Verifica se existem erros
+        //if($validator->fails()) {
+            //return redirect()->action('ProdutoController@novo');
+            //return $messages;
+        //}
+
         // Usando eloquent
-        $produto = Produto::create(Request::all());
+        $produto = Produto::create($request::all());
         
         $produto->save();
 
@@ -90,13 +104,13 @@ class ProdutoController extends Controller
         return view('produto.altera', ['p' => $produto]);
     }
 
-    public function atualizar($id)
+    public function atualizar($id, ProdutoRequest $request)
     {
-        // Primeiro encontrar a linha a ser atualizada
-        $produto = Produto::find($id);
+        // Encontra pelo id a linha a ser atualizada , depois atualiza os campos
+        $produto = Produto::find($id)->update($request::all());
 
-        // Atualiza a tabela com os campos do form
-        $produto->update(Request::all());
+        // Verifica qual campo tem o id desejado, depois atualiza os campos. USAR COM Request::except()
+        //$produto = Produto::where('id', $id)->update(Request::except('_token', '_method'));
         
         return redirect()->action('ProdutoController@lista');
     }
