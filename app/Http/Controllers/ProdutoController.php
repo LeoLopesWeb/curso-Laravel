@@ -11,6 +11,11 @@ use estoque\Http\Requests\ProdutoRequest;
 class ProdutoController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth', ['only' => ['novo', 'remove', 'alterar']]);
+    }
+
     public function lista()
     {
         // Usando instruções sql
