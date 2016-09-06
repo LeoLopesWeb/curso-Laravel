@@ -88,9 +88,9 @@ class ProdutoController extends Controller
         // Usando eloquent
         $produto = Produto::create($request::all());
         
-        $produto->save();
+        //$produto->save();
 
-        // Redireciona para o método lista. // Passa os parametros do formulário. // Especifica quais parâmetros serão enviados
+        // Redireciona para o método lista. // Mantém os parametros da requisição anterior. // Especifica quais parâmetros serão enviados
         return redirect()->action('ProdutoController@lista')->withInput(Request::only('nome'));
     }
 

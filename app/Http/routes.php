@@ -7,9 +7,6 @@ Route::controllers([
     'password' => 'Auth\PasswordController'
 ]);
 
-Route::get('/login', 'LoginController@login');
-
-
 Route::get('/sobre', function () {
     return "Informações sobre o site";
 });
